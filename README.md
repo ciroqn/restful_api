@@ -5,3 +5,6 @@ requests. These requests can be for *all* articles/documents, or for single arti
 
 The example here uses the `app.route(...)` 'chaining' for more streamlined code.
 
+## Useful Resources
+
+- [Postman](https://www.postman.com/product/what-is-postman/) 
