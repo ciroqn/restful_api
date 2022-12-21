@@ -65,3 +65,69 @@ app.route("/articles")
     }
   })
 });
+
+//////////////// Requests targeting a SPECIFIC article ////////////////////////
+
+// note `.update()` is deprecated...
+
+app.route("/articles/:articleTitle")
+.get(function(req, res) {
+  Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
+    if (!err) {
+      res.send(foundArticle)
+    } else {
+      res.send("Sorry, we couldn't find an article with that title.")
+    }
+  });
+})
+
+.put(function(req, res) {
+  Article.updateOne(
+    {title: req.params.articleTitle},
+    {$set:{title: req.body.title, content: req.body.content}},
+    {upsert: true},
+    function(err) {
+      if (!err) {
+        res.send("Successfully updated article.")
+      } else {
+        console.log(err);
+        res.send(err);
+      }
+    }
+  )
+})
+
+.patch(function(req, res) {
+  Article.updateOne(
+    {title: req.params.articleTitle},
+    {$set: req.body},
+    function(err) {
+      if (!err) {
+        res.send("Successfully updated article.")
+      } else {
+        console.log(err);
+        res.send(err);
+      }
+    }
+  )
+})
+
+.delete(function(req, res) {
+  Article.deleteOne(
+    {title: req.params.articleTitle},
+    function(err) {
+      if (!err) {
+        res.send("Successfully deleted article.")
+      } else {
+        res.send(err)
+      }
+    }
+  )
+})
+
+
+// For our reference vvvvvvv
+
+app.listen(3000, function() {
+  console.log("Server started on port 3000");
+});
