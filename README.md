@@ -1,5 +1,7 @@
 # Creating a RESTful API 
 
+* Initialise npm modules and install ejs, body-parser, mongoose & express.
+
 This project is almost a template for an API where users can manage a database of documents using HTTP 'commands' such as GET, POST, DELETE, PATCH
 requests. These requests can be for *all* articles/documents, or for single articles/documents.
 
